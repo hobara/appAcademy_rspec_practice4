@@ -1,5 +1,4 @@
 class Temperature
-  # TODO: your code goes here!
 
   def initialize(input = {})
     @input = input

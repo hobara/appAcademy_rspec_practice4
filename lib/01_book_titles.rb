@@ -1,17 +1,16 @@
 class Book
-  # TODO: your code goes here!
 
   def title
     @title
   end
 
-  def title=title
+  def title=(title)
     titlized = []
-    keep_lowercase = ["a", "an", "the", "and", "in", "of"]
+    be_lowercase = %w(a an the and in of)
     title.split.each_with_index do |word, idx|
       if idx == 0
         titlized << word.capitalize
-      elsif keep_lowercase.include?(word)
+      elsif be_lowercase.include?(word)
         titlized << word
       else
         titlized << word.capitalize

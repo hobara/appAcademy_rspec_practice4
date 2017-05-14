@@ -1,13 +1,8 @@
 class Dictionary
-  # TODO: your code goes here!
-  attr_accessor :entries
+  attr_reader :entries
 
   def initialize
     @entries = {}
-  end
-
-  def entries
-    @entries
   end
 
   def add(data)
@@ -38,7 +33,7 @@ class Dictionary
 
   def printable
     to_be_printed = []
-    @entries = @entries.sort_by { |k, v| k }
+    @entries = @entries.sort_by { |k, _v| k }
     @entries.each do |k, v|
       to_be_printed << "[#{k}] \"#{v}\""
     end

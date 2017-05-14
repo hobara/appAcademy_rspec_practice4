@@ -29,7 +29,6 @@
 # all the items of `set1` that aren't in `set2`.
 
 class MyHashSet
-  attr_accessor :set1, :set2
 
   def initialize
     @store = {}
@@ -40,12 +39,12 @@ class MyHashSet
   end
 
   def include?(el)
-    @store.keys.include?(el) ? true : false
+    @store.keys.include?(el)
   end
 
   def delete(el)
     if @store.include?(el)
-      @store .delete(el)
+      @store.delete(el)
       true
     else
       false
@@ -53,32 +52,42 @@ class MyHashSet
   end
 
   def to_a
-    array = []
-    @store.keys.each { |k| array << k }
-    array
+    @store.keys
   end
-
 
   def union(set2)
     new_set = MyHashSet.new
-    set1 = self
-    set1.to_a.each { |el| new_set.insert(el) }
+    self.to_a.each { |el| new_set.insert(el) }
     set2.to_a.each { |el| new_set.insert(el) unless new_set.include?(el) }
     new_set
   end
 
   def intersect(set2)
     new_set = MyHashSet.new
-    set1 = self
-    set1.to_a.each { |el| new_set.insert(el) if set2.to_a.include?(el) }
+    self.to_a.each { |el| new_set.insert(el) if set2.to_a.include?(el) }
     new_set
   end
 
   def minus(set2)
     new_set = MyHashSet.new
-    set1 = self
-    set1.to_a.each { |el| new_set.insert(el) unless set2.to_a.include?(el) }
+    self.to_a.each { |el| new_set.insert(el) unless set2.to_a.include?(el) }
     new_set
+  end
+
+  def symmetric_difference(set2)
+    new_set = MyHashSet.new
+    self.to_a.each { |el| new_set.insert(el) unless set2.to_a.include?(el) }
+    set2.to_a.each { |el| new_set.insert(el) unless self.to_a.include?(el) }
+    new_set
+  end
+
+  def ==(object)
+    if self.count == object.count
+      if object.to_a.all? { |el| self.include?(el) }
+        return true
+      end
+    end
+    false
   end
 
 end
